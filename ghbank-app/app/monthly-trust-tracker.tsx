@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 function TrustScoreDonut({ percent }) {
   return (
@@ -44,7 +44,11 @@ export default function MonthlyTrustTrackerScreen() {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView 
+      style={styles.container} 
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={true}
+    >
       <Text style={styles.header}>Monthly Trust Tracker</Text>
       <View style={styles.box}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -130,9 +134,28 @@ export default function MonthlyTrustTrackerScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFF4F0', padding: 0 },
-  header: { fontSize: 22, fontWeight: 'bold', color: '#f60', marginVertical: 16, marginLeft: 16 },
-  box: { backgroundColor: '#fff', borderRadius: 16, padding: 18, marginHorizontal: 12, marginBottom: 16 },
+  container: { 
+    flex: 1, 
+    backgroundColor: '#FFF4F0' 
+  },
+  contentContainer: { 
+    paddingBottom: 40,
+    paddingTop: 0
+  },
+  header: { 
+    fontSize: 22, 
+    fontWeight: 'bold', 
+    color: '#f60', 
+    marginVertical: 16, 
+    marginHorizontal: 16 
+  },
+  box: { 
+    backgroundColor: '#fff', 
+    borderRadius: 16, 
+    padding: 18, 
+    marginHorizontal: 12, 
+    marginBottom: 16 
+  },
   latestData: { color: '#888', fontSize: 12, marginBottom: 2 },
   trustPoints: { color: '#f60', fontWeight: 'bold', fontSize: 24, textAlign: 'left', marginBottom: 0, marginTop: 2 },
   trustPointsLabel: { color: '#f60', fontWeight: 'bold', fontSize: 15, marginBottom: 4 },

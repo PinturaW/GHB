@@ -3,12 +3,12 @@ import * as ImagePicker from 'expo-image-picker';
 import React, { useState } from 'react';
 import { Alert, Image, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-const PROOF_TYPES = ['Loan Payment', 'Credit Card Payment', 'Other'];
+const DEBT_TYPES = ['Credit Card', 'Personal Loan', 'Car Loan', 'Mortgage', 'Other'];
 
-export default function FinancialProofScreen() {
-  const [type, setType] = useState(PROOF_TYPES[0]);
-  const [amount, setAmount] = useState('');
-  const [payDate, setPayDate] = useState(new Date());
+export default function UploadFormalDebtScreen() {
+  const [type, setType] = useState(DEBT_TYPES[0]);
+  const [balance, setBalance] = useState('');
+  const [dueDate, setDueDate] = useState(new Date());
   const [showDate, setShowDate] = useState(false);
   const [proof, setProof] = useState(null);
 
@@ -23,15 +23,15 @@ export default function FinancialProofScreen() {
     }
   };
 
-  const onSubmit = () => {
-    if (!proof || !payDate) {
+  const onConfirm = () => {
+    if (!balance || !proof || !dueDate) {
       Alert.alert('กรุณากรอกข้อมูลและอัปโหลดเอกสารให้ครบถ้วน');
       return;
     }
-    Alert.alert('สำเร็จ', '+2 Trust Points ได้รับสำหรับการอัปโหลดหลักฐานวินัยทางการเงิน');
-    setAmount('');
+    Alert.alert('สำเร็จ', '+3 Trust Points ได้รับและบันทึกวันครบกำหนดในปฏิทินแล้ว');
+    setBalance('');
     setProof(null);
-    setPayDate(new Date());
+    setDueDate(new Date());
   };
 
   return (
@@ -40,47 +40,47 @@ export default function FinancialProofScreen() {
       contentContainerStyle={styles.contentContainer}
       showsVerticalScrollIndicator={true}
     >
-      <Text style={styles.header}>Upload Financial Discipline Proof</Text>
+      <Text style={styles.header}>Upload Your Formal Debt</Text>
       
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Type of Proof</Text>
+        <Text style={styles.sectionTitle}>Type of Debt</Text>
         <View style={styles.row}>
-          {PROOF_TYPES.map((t) => (
+          {DEBT_TYPES.map((t) => (
             <TouchableOpacity
               key={t}
               style={[styles.typeBtn, type === t && styles.typeBtnSelected]}
               onPress={() => setType(t)}
             >
-              <Text style={{ color: type === t ? '#fff' : '#f60', fontSize: 14 }}>{t}</Text>
+              <Text style={{ color: type === t ? '#fff' : '#f60', fontSize: 12 }}>{t}</Text>
             </TouchableOpacity>
           ))}
         </View>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Amount Paid (optional)</Text>
+        <Text style={styles.sectionTitle}>Outstanding Balance</Text>
         <TextInput
           style={styles.input}
           keyboardType="numeric"
           placeholder="0.00"
-          value={amount}
-          onChangeText={setAmount}
+          value={balance}
+          onChangeText={setBalance}
         />
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Date of Payment (optional)</Text>
+        <Text style={styles.sectionTitle}>Next Due Date</Text>
         <TouchableOpacity onPress={() => setShowDate(true)} style={styles.input}>
-          <Text>{payDate ? payDate.toLocaleDateString() : 'DD/MM/YYYY'}</Text>
+          <Text>{dueDate ? dueDate.toLocaleDateString() : 'DD/MM/YYYY'}</Text>
         </TouchableOpacity>
         {showDate && (
           <DateTimePicker
-            value={payDate}
+            value={dueDate}
             mode="date"
             display={Platform.OS === 'ios' ? 'spinner' : 'default'}
             onChange={(event, date) => {
               setShowDate(false);
-              if (date) setPayDate(date);
+              if (date) setDueDate(date);
             }}
           />
         )}
@@ -94,13 +94,13 @@ export default function FinancialProofScreen() {
         {proof && <Image source={{ uri: proof }} style={styles.preview} />}
       </View>
 
-      <TouchableOpacity style={styles.confirmBtn} onPress={onSubmit}>
-        <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>Submit Financial Proof</Text>
+      <TouchableOpacity style={styles.confirmBtn} onPress={onConfirm}>
+        <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>Add Formal Debt</Text>
       </TouchableOpacity>
-      
-      <View style={styles.trustPointsBox}>
-        <Text style={styles.trustPointsText}>
-          +2 Trust Points for each verified upload
+
+      <View style={styles.pushReminder}>
+        <Text style={styles.reminderText}>
+          Push Reminder: You'll be notified monthly to update your debt status.
         </Text>
       </View>
     </ScrollView>
@@ -163,10 +163,10 @@ const styles = StyleSheet.create({
     borderWidth: 1, 
     borderColor: '#f60', 
     borderRadius: 16, 
-    padding: 12, 
+    padding: 8, 
     marginRight: 8, 
     marginBottom: 8,
-    minWidth: 100,
+    minWidth: 80,
     alignItems: 'center'
   },
   typeBtnSelected: { 
@@ -184,18 +184,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16
   },
-  trustPointsBox: {
-    backgroundColor: '#e6f7ff',
-    borderRadius: 8,
-    padding: 12,
+  pushReminder: { 
+    backgroundColor: '#fffbe6', 
+    borderRadius: 8, 
+    padding: 16, 
     marginTop: 16,
     borderLeftWidth: 4,
     borderLeftColor: '#f60'
   },
-  trustPointsText: {
-    color: '#666',
+  reminderText: {
     fontSize: 14,
-    textAlign: 'center',
-    fontStyle: 'italic'
+    color: '#666',
+    lineHeight: 20
   }
 });
