@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const platforms = [
   {
@@ -18,16 +18,64 @@ const platforms = [
 
 export default function PlatformSyncScreen() {
   const [selected, setSelected] = useState(platforms[0].key);
+  // เริ่มต้นเป็น object ว่าง (ไม่มีการเชื่อมต่อ)
   const [connected, setConnected] = useState({});
   const [lastSynced, setLastSynced] = useState('June 8, 2025 – 9:35 PM');
 
   const handleConnect = (key) => {
-    setConnected({ ...connected, [key]: true });
-    Alert.alert('Connected!', `Platform ${platforms.find(p => p.key === key).name} is now connected.`);
+    const isCurrentlyConnected = connected[key];
+    
+    if (isCurrentlyConnected) {
+      // ถ้าเชื่อมต่ออยู่แล้ว ให้แสดง confirmation dialog
+      Alert.alert(
+        'Disconnect Platform',
+        `Are you sure you want to disconnect from ${platforms.find(p => p.key === key).name}?`,
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'Disconnect',
+            style: 'destructive',
+            onPress: () => {
+              setConnected({ ...connected, [key]: false });
+              Alert.alert('Disconnected!', `Platform ${platforms.find(p => p.key === key).name} has been disconnected.`);
+            },
+          },
+        ]
+      );
+    } else {
+      // ถ้ายังไม่เชื่อมต่อ ให้เชื่อมต่อเลย
+      setConnected({ ...connected, [key]: true });
+      Alert.alert('Connected!', `Platform ${platforms.find(p => p.key === key).name} is now connected.`);
+    }
   };
 
   const platform = platforms.find(p => p.key === selected);
   const isConnected = connected[selected];
+
+  // กำหนดข้อความปุ่มตามสถานะ
+  const getButtonText = () => {
+    if (isConnected === undefined || isConnected === false) {
+      return 'Connect';
+    }
+    return 'Connected';
+  };
+
+  const getButtonStyle = () => {
+    if (isConnected === undefined || isConnected === false) {
+      return styles.connectBtn;
+    }
+    return styles.connected;
+  };
+
+  const getButtonTextColor = () => {
+    if (isConnected === undefined || isConnected === false) {
+      return '#f60';
+    }
+    return '#090';
+  };
 
   return (
     <View style={styles.container}>
@@ -55,12 +103,11 @@ export default function PlatformSyncScreen() {
         <View style={styles.platformStatusRow}>
           <Text style={{ fontSize: 16 }}>{platform.icon} {platform.name}</Text>
           <TouchableOpacity
-            style={[styles.statusBtn, isConnected ? styles.connected : styles.unconnected]}
+            style={[styles.statusBtn, getButtonStyle()]}
             onPress={() => handleConnect(platform.key)}
-            disabled={isConnected}
           >
-            <Text style={{ color: isConnected ? '#090' : '#f60' }}>
-              {isConnected ? 'Connected' : 'Unconnected'}
+            <Text style={{ color: getButtonTextColor() }}>
+              {getButtonText()}
             </Text>
           </TouchableOpacity>
         </View>
@@ -108,7 +155,7 @@ const styles = StyleSheet.create({
   platformStatusRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 },
   statusBtn: { paddingVertical: 5, paddingHorizontal: 14, borderRadius: 8, borderWidth: 1 },
   connected: { borderColor: '#090', backgroundColor: '#e6ffe6' },
-  unconnected: { borderColor: '#f60', backgroundColor: '#fff6ee' },
+  connectBtn: { borderColor: '#f60', backgroundColor: '#fff6ee' },
   summaryBox: { marginTop: 16 },
   summaryTitle: { fontWeight: 'bold', marginBottom: 10, color: '#333' },
   summaryRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 4 },
