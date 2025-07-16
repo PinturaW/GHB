@@ -1,50 +1,57 @@
-# Welcome to your Expo app 👋
+# 🏠 GH Bank My First Home App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mobile-first income assessment tool built with React Native and TypeScript.  
+Designed for individuals with informal or fluctuating income, this app enables users to estimate their monthly income, upload basic financial documents, and begin the process of housing loan eligibility—simply and accessibly.
 
-## Get started
+> 🌐 **Live Website**: [ghbank-app.vercel.app](https://ghbank-app.vercel.app)
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 🎯 About the Project
 
-2. Start the app
+This project was developed for the **GHB Open Innovation Hackathon 2025**, hosted by the Government Housing Bank of Thailand (ธอส.).  
+It addresses one of Thailand’s most pressing financial inclusion challenges: helping low- to middle-income individuals—especially those in the informal economy—gain access to housing finance.
 
-   ```bash
-   npx expo start
-   ```
+### ✅ Key Objectives:
+- Provide income visibility for users lacking formal pay slips
+- Reduce barriers in the early stages of home loan application
+- Support GHB’s mission to make home ownership accessible to all
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 💡 Core Features
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- 👷 Select your occupation (e.g., employee, freelancer, vendor)
+- 📊 Choose income type (daily, weekly, or monthly)
+- 🧮 Auto-calculate estimated monthly income
+- 🖼 Upload supporting documents (bank statement and Thai ID)
+- ⚠️ Real-time input validation and alerts
+- ✅ Confirmation popup before proceeding to Dashboard
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## 🚀 Tech Stack
+
+- **React Native (Expo Framework)**
+- **TypeScript (.tsx)**
+- **expo-router** – file-based routing
+- **expo-image-picker** – image upload from device gallery
+- **React Hooks** – modern state and lifecycle management
+- **Vercel** – web version deployment
+
+---
+
+## 🛠️ How to Run Locally
 
 ```bash
-npm run reset-project
+git clone https://github.com/PinturaW/ghbank-app.git
+cd ghbank-app
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 📬 Contact  
+Developed by **Wichuon Charoensombat** (PinturaW)  
+📧 Reach me on [LinkedIn](https://www.linkedin.com/in/wichuon-charoensombat) or GitHub
