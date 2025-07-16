@@ -10,7 +10,7 @@ Designed for individuals with informal or fluctuating income, this app enables u
 ## 🎯 About the Project
 
 This project was developed for the **GHB Open Innovation Hackathon 2025**, hosted by the Government Housing Bank of Thailand (ธอส.).  
-It addresses one of Thailand’s most pressing financial inclusion challenges: helping low- to middle-income individuals—especially those in the informal economy—gain access to housing finance.
+It addresses one of Thailand’s most pressing financial inclusion challenges: helping low to middle income individuals especially those in the informal economy gain access to housing finance.
 
 ### ✅ Key Objectives:
 - Provide income visibility for users lacking formal pay slips
@@ -21,7 +21,7 @@ It addresses one of Thailand’s most pressing financial inclusion challenges: h
 
 ## 💡 Core Features
 
-- 👷 Select your occupation (e.g., employee, freelancer, vendor)
+- 👷 Select your occupation
 - 📊 Choose income type (daily, weekly, or monthly)
 - 🧮 Auto-calculate estimated monthly income
 - 🖼 Upload supporting documents (bank statement and Thai ID)
